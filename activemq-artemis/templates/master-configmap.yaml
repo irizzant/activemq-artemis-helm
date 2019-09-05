@@ -19,11 +19,15 @@ data:
             </master>
           </replication>
         </ha-policy>
+
+        <acceptors>
+            <acceptor name="netty-acceptor">tcp://localhost:61616?anycastPrefix=jms.queue.;multicastPrefix=jms.topic.</acceptor>
+        </acceptors>
       </core>
     </configuration>
-  
+
   configure-cluster.sh: |
-    
+
     {{ $name := default .Chart.Name .Values.nameOverride }}
     {{ $releaseName := printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
 
